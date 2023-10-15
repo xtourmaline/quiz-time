@@ -1,0 +1,58 @@
+/* Universal Selector */
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
+}
+
+body {
+    background-color: #6744b2;
+}
+
+/* Centers the white box */
+.center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50vh;
+}
+
+/* Formatting of containers for information, quiz, and end */
+#information,
+#quiz,
+#end {
+    width: 50%;
+    border-radius: 10px;
+    padding: 2%;
+    background-color: white;
+}
+
+/* Selectors for information page */
+#rules {
+    margin: 15px;
+}
+
+/* Selectors for quiz page */
+.choiceButton {
+    margin: 5px;
+    font-size: 20px;
+}
+
+#quiz {
+    display: none;
+}
+
+#choices {
+    display: flex;
+    flex-direction: column;
+    margin: 3%;
+}
+
+/* Selectors for end page */
+#end {
+    display: none ;
+}
+
+
+

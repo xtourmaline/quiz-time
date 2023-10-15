@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Quiz Time</title>
+    <link rel="stylesheet" href="./assets/css/style.css">
+</head>
+
+<body>
+    <div class="center">
+        <!-- Container for Quiz Rules -->
+        <section id="information">
+            <h1>JavaScript Quiz</h1>
+
+            <ul id="rules">
+                <li>You will have 15 seconds to complete this quiz.</li>
+                <li>Read question.</li>
+                <li>Choose the best answer.</li>
+            </ul>
+            
+            <button id="startButton">Start</button>
+        </section>
+
+        <!-- Container for Quiz -->
+        <section id="quiz">
+            <h2 id="timer"></h2>
+            <p id="question"></p>
+            <div id="choices">
+                <button class="choiceButton" id="choice0"></button>
+                <button class="choiceButton" id="choice1"></button>
+                <button class="choiceButton" id="choice2"></button>
+                <button class="choiceButton" id="choice3"></button>
+            </div>
+            <p id="score"></p>
+        </section>
+
+        <!-- Container for End Screen -->
+        <section id="end">
+            
+        </section>
+    </div>
+
+    <script src="./assets/js/script.js"></script>
+</body>
