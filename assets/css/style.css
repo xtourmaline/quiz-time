@@ -1,9 +1,9 @@
 /* Universal Selector */
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
 :root {
@@ -15,7 +15,12 @@ body {
     background-color: var(--main-color);
 }
 
-/* Centers the white box */
+/* Selector to margin rules at the first screen */
+#rules {
+    margin: 15px;
+}
+
+/* Centering elements on the viewport */
 .center {
     display: flex;
     align-items: center;
@@ -23,12 +28,8 @@ body {
     height: 50vh;
 }
 
-
-/* Formatting of containers for information, quiz, and end */
-#information,
-#quiz,
-#end,
-#highscores {
+/* Format specifier for the containers on our page */
+.container {
     width: 50%;
     max-width: 500px;
     border-radius: 10px;
@@ -36,72 +37,62 @@ body {
     background-color: white;
 }
 
-/* Selectors for information page */
-h1 {
+/* Selector for all headings in the containers */
+.container h1,
+.container h3 {
     color: var(--darkcolor);
 }
 
+/* Selector for main heading in containers */
+.container h1 {
+    margin-bottom: 2%;
+}
+
+/* Selector for the subheadings in containers */
+.container h3 {
+    margin-top: 3%;
+    margin-bottom: 1%;
+}
+
+/*makes button wide*/
 #information {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
 }
 
-#rules {
-    margin: 15px;
-}
-
-/* Selectors for quiz page */
-h2{
-    color: var(--darkcolor);
-}
-
+/* Selector for quiz choice buttons to space them out and make larger */
 .choiceButton {
     margin: 5px;
     font-size: 20px;
 }
 
-#quiz {
-    display: none;
-}
-
+/* Selector to display choice buttons correctly */
 #choices {
     display: flex;
     flex-direction: column;
     margin: 10%;
 }
 
-/* Selectors for end page */
-h3 {
-    color: var(--darkcolor);
-    margin-top: 20px;
-}
-
+/* Selectors to hide the various containers, made visible by JS later */
 #end,
+#quiz,
 #highscores {
-    display: none ;
+    display: none;
 }
 
-/* Buttons */
-#save button {
-    background-color: transparent;
-    border: 2px solid var(--main-color);
-    border-radius: 8px;
-    color: #000000;
-    cursor: pointer;
-    font-size: 1em;
-    padding: 5px;
-}
-
+/* Selector to add hover effect */
 button:hover {
     background-color: var(--main-color);
     color: white;
 }
 
+/* Selector to add space between scores and the buttons on the highscore screen */
 #scoreList {
-    margin-top: 10px;
+    margin-bottom: 2%;
 }
 
+/* Selector to align names and scores to polar opposite sides */
 .score {
     display: flex;
     justify-content: space-between;

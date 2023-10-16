@@ -12,7 +12,7 @@
 <body>
     <div class="center">
         <!-- Container for Quiz Rules -->
-        <section id="information">
+        <section class="container" id="information">
             <h1>JavaScript Quiz</h1>
 
             <ul id="rules">
@@ -25,8 +25,8 @@
         </section>
 
         <!-- Container for Quiz -->
-        <section id="quiz">
-            <h2 id="timer"></h2>
+        <section class="container" id="quiz">
+            <h1 id="timer"></h1>
             <p id="question"></p>
             <div id="choices">
                 <button class="choiceButton" id="choice0"></button>
@@ -38,8 +38,8 @@
         </section>
 
         <!-- Container for End Screen -->
-        <section id="end">
-            <h2>You completed the quiz!<h2>
+        <section class="container" id="end">
+            <h1>You completed the quiz!<h1>
             
             <h3>Your Score</h3>
             <p id="finalScore"></p>
@@ -49,9 +49,10 @@
             <input type="text" id="initials" name="initials" placeholder="JD" />
             <button id="save">SAVE</button>
         </section>
+
         <!-- Container for Highscores screen -->
-        <section id="highscores">
-            <h2>Highscores</h2>
+        <section class="container" id="highscores">
+            <h1>Highscores</h1>
             <ul id="scoreList">
             </ul>
             <button id="refresh">Go back</button>
