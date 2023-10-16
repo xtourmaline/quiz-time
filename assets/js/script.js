@@ -7,8 +7,12 @@ let questionEl = document.getElementById("question");
 let choicesEl = document.getElementById("choices");
 let scoreEl = document.getElementById("score");
 let finalScoreEl = document.getElementById("finalScore");
-let playerEl = document.getElementById("initials")
-let saveButtonEl = document.getElementById("save")
+let playerEl = document.getElementById("initials");
+let saveButtonEl = document.getElementById("save");
+let highscoresEl = document.getElementById("highscores");
+let scoreListEl = document.getElementById("scoreList");
+let refreshEl = document.getElementById("refresh");
+let clearScoresEl = document.getElementById("clearScores");
 let timeLeft = 15;
 const questions = [
     {
@@ -65,19 +69,20 @@ const questions = [
 let currentQuestion = 0;
 let score = 0;
 
+let timeInterval;
+
 // countdown timer, end screen pops up when timer run out
 function countdown() {
     timerEl.textContent = "Time Left: " + timeLeft;
 
-    let timeInterval = setInterval(function () {
+    timeInterval = setInterval(function () {
         timeLeft--;
         timerEl.textContent = "Time Left: " + timeLeft;
 
         if(timeLeft <= 0) {
-            clearInterval(timeInterval);
             quizEl.style.display = "none";
             endEl.style.display = "block";
-            displaysLastSave();
+            clearInterval(timeInterval);
             finalScoreEl.textContent = score
         }
     }, 1000);
@@ -88,7 +93,7 @@ function displayQuestion() {
     if (currentQuestion >= questions.length) {
         quizEl.style.display = "none";
         endEl.style.display = "block";
-        displaysLastSave();
+        clearInterval(timeInterval);
         finalScoreEl.textContent = score
     }
     else {
@@ -125,28 +130,90 @@ startButtonEl.addEventListener("click", function() {
     displayQuestion();
 });
 
-// saves player score
 function saveScore() {
-    let playerSave = {
-      player: playerEl.value,
-      playerScore: score,
+    let scoreHistory = [];
+    let newScore = {
+        name: playerEl.value,
+        score: score,
     };
+    let lastStorage = localStorage.getItem("scoreHistory");
 
-    localStorage.setItem("playerSave", JSON.stringify(playerSave));
+    if (lastStorage !== null) {
+        scoreHistory = JSON.parse(lastStorage);
+    }
+
+    let foundOldScore = false;
+
+    for (score of scoreHistory) {
+        if (score["name"] == newScore["name"]) {
+            foundOldScore = true;
+            score["score"] = newScore["score"];
+        }
+    }
+
+    if (!foundOldScore) {
+        scoreHistory.push(newScore);
+    }
+    localStorage.setItem("scoreHistory", JSON.stringify(scoreHistory));
 }
 
-// displays saved information if there is any
-function displaysLastSave() {
-    let lastSave = JSON.parse(localStorage.getItem("playerSave"));
+function displayOldScores() {
+    endEl.style.display = "none";
+    highscoresEl.style.display = "block";
 
-    if (lastSave !== null) {
-        document.getElementById("saveInitials").textContent = "Initial: " + lastSave.player;
-        document.getElementById("saveScore").textContent = "Score: " + lastSave.playerScore;
+    let scoreHistory = JSON.parse(localStorage.getItem("scoreHistory")); // don't need to check here because saveScore() guarantees its gonna be there
+    // https://stackoverflow.com/a/979289/9091276
+    scoreHistory.sort(function(prev, next) {
+        let scoreComp = next["score"] - prev["score"];
+        let nameComp = prev["name"].localeCompare(next["name"]);
+
+        return scoreComp == 0 ? nameComp : scoreComp;
+    });
+
+    const firstPlaceColor = "rgb(193, 225, 193)";
+    const secondPlaceColor = "rgb(255, 250, 160)";
+    const thirdPlaceColor = "rgb(250, 160, 160)";
+
+    // guaranteed in order
+    let place = 1; // track the "place", ie. track firstPlace, secondPlace, or thirdPlace
+    for (score of scoreHistory) {
+        let scoreLi = document.createElement("li");
+        let nameP = document.createElement("p");
+        let scoreP = document.createElement("p");
+        
+        scoreLi.className = "score";
+
+        if (place == 1) {
+            scoreLi.style.backgroundColor = firstPlaceColor;
+        }
+        else if (place == 2) {
+            scoreLi.style.backgroundColor = secondPlaceColor;
+        }
+        else if (place == 3) {
+            scoreLi.style.backgroundColor = thirdPlaceColor;
+        }
+
+        nameP.textContent = score["name"];
+        scoreP.textContent = score["score"];
+
+        scoreLi.appendChild(nameP);
+        scoreLi.appendChild(scoreP);
+
+        scoreListEl.appendChild(scoreLi);
+        place++;
     }
-  }
+}
 
-saveButtonEl.addEventListener('click', function (event) {
-    event.preventDefault();
+saveButtonEl.addEventListener('click', function () {
     saveScore();
-    displaysLastSave();
-  });
+    displayOldScores();
+});
+
+refreshEl.addEventListener("click", function() {
+    window.location.reload();
+});
+
+clearScoresEl.addEventListener("click", function() {
+    localStorage.setItem("scoreHistory", "[]");
+    scoreListEl.replaceChildren(); // https://stackoverflow.com/a/65413839
+});

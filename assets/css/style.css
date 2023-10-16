@@ -27,7 +27,8 @@ body {
 /* Formatting of containers for information, quiz, and end */
 #information,
 #quiz,
-#end {
+#end,
+#highscores {
     width: 50%;
     max-width: 500px;
     border-radius: 10px;
@@ -76,7 +77,8 @@ h3 {
     margin-top: 20px;
 }
 
-#end {
+#end,
+#highscores {
     display: none ;
 }
 
@@ -94,4 +96,13 @@ h3 {
 button:hover {
     background-color: var(--main-color);
     color: white;
+}
+
+#scoreList {
+    margin-top: 10px;
+}
+
+.score {
+    display: flex;
+    justify-content: space-between;
 }
