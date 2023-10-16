@@ -68,7 +68,7 @@ const questions = [
 ];
 
 let currentQuestion = 0;
-let timeLeft = 15;
+let timeLeft = 45;
 let score = 0;
 
 let timeInterval;
