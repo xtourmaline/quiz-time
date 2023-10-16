@@ -123,6 +123,13 @@ function displayQuestion() {
     }
 }
 
+/*
+Saves the score to a localStorage named "scoreHistory".
+It stores a list of all the scores saved throughout doing the quiz.
+If there is no score, this function ensures that it makes a new empty list,
+and adds it to the localStorage, thus preventing the localStorage from ever
+being null.
+*/
 function saveScore() {
     let scoreHistory = [];
     let newScore = {
@@ -150,6 +157,11 @@ function saveScore() {
     localStorage.setItem("scoreHistory", JSON.stringify(scoreHistory));
 }
 
+/*
+Displays all previous scores from the "scoreHistory" localStorage item.
+It sorts all entries first by their score, then by their name in alphabetical order.
+Entries in 1st, 2nd, and 3rd place get special colors to pop out.
+*/
 function displayOldScores() {
     endEl.style.display = "none";
     highscoresEl.style.display = "block";
@@ -186,7 +198,7 @@ function displayOldScores() {
             scoreLi.style.backgroundColor = thirdPlaceColor;
         }
 
-        nameP.textContent = score["name"];
+        nameP.textContent = `${place}. ` + score["name"];
         scoreP.textContent = score["score"];
 
         scoreLi.appendChild(nameP);
