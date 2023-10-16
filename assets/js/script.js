@@ -13,7 +13,7 @@ let highscoresEl = document.getElementById("highscores");
 let scoreListEl = document.getElementById("scoreList");
 let refreshEl = document.getElementById("refresh");
 let clearScoresEl = document.getElementById("clearScores");
-let timeLeft = 15;
+
 const questions = [
     {
         question: "Inside which HTML element do we put the JavaScript?",
@@ -66,7 +66,9 @@ const questions = [
         correctIndex: 2
     },
 ];
+
 let currentQuestion = 0;
+let timeLeft = 15;
 let score = 0;
 
 let timeInterval;
@@ -120,15 +122,6 @@ function displayQuestion() {
         }
     }
 }
-
-// start button to start quiz
-startButtonEl.addEventListener("click", function() {   
-    informationEl.style.display = "none";
-    quizEl.style.display = "block";
-    scoreEl.textContent = `Score: ${score}`;
-    countdown();
-    displayQuestion();
-});
 
 function saveScore() {
     let scoreHistory = [];
@@ -203,6 +196,15 @@ function displayOldScores() {
         place++;
     }
 }
+
+// start button to start quiz
+startButtonEl.addEventListener("click", function() {   
+    informationEl.style.display = "none";
+    quizEl.style.display = "block";
+    scoreEl.textContent = `Score: ${score}`;
+    countdown();
+    displayQuestion();
+});
 
 saveButtonEl.addEventListener('click', function () {
     saveScore();
