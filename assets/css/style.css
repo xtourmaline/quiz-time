@@ -6,8 +6,13 @@
     font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
 }
 
+:root {
+    --main-color: #6744b2;
+    --darkcolor: #3d276d;
+}
+
 body {
-    background-color: #6744b2;
+    background-color: var(--main-color);
 }
 
 /* Centers the white box */
@@ -18,22 +23,38 @@ body {
     height: 50vh;
 }
 
+
 /* Formatting of containers for information, quiz, and end */
 #information,
 #quiz,
 #end {
     width: 50%;
+    max-width: 500px;
     border-radius: 10px;
     padding: 2%;
     background-color: white;
 }
 
 /* Selectors for information page */
+h1 {
+    color: var(--darkcolor);
+}
+
+#information {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
 #rules {
     margin: 15px;
 }
 
 /* Selectors for quiz page */
+h2{
+    color: var(--darkcolor);
+}
+
 .choiceButton {
     margin: 5px;
     font-size: 20px;
@@ -46,13 +67,31 @@ body {
 #choices {
     display: flex;
     flex-direction: column;
-    margin: 3%;
+    margin: 10%;
 }
 
 /* Selectors for end page */
+h3 {
+    color: var(--darkcolor);
+    margin-top: 20px;
+}
+
 #end {
     display: none ;
 }
 
+/* Buttons */
+#save button {
+    background-color: transparent;
+    border: 2px solid var(--main-color);
+    border-radius: 8px;
+    color: #000000;
+    cursor: pointer;
+    font-size: 1em;
+    padding: 5px;
+}
 
-
+button:hover {
+    background-color: var(--main-color);
+    color: white;
+}

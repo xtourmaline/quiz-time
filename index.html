@@ -20,7 +20,7 @@
                 <li>Read question.</li>
                 <li>Choose the best answer.</li>
             </ul>
-            
+
             <button id="startButton">Start</button>
         </section>
 
@@ -39,14 +39,17 @@
 
         <!-- Container for End Screen -->
         <section id="end">
-            <h3>Log your high score!</h3>
-            <div class="input-group">
-                <label for="initials">Initials</label>
-                <input type="text" id="name" name="initials" placeholder="JD" />
-                <button id="save">Save</button>
-            </div>
-            <br></br>
-            <h3 id="saveScoreBoard"></h3>
+            <h2>You completed the quiz!<h2>
+            
+            <h3>Your Score</h3>
+            <p id="finalScore"></p>
+
+            <h3>Log your score</h3>
+            <label for="name">Initials</label>
+            <input type="text" id="initials" name="initials" placeholder="JD" />
+            <button id="save">SAVE</button>
+    
+            <h3>Last Saved Score</h3>
             <p id="saveInitials"></p>
             <p id="saveScore"></p>
         </section>

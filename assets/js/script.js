@@ -6,7 +6,8 @@ let timerEl = document.getElementById("timer");
 let questionEl = document.getElementById("question");
 let choicesEl = document.getElementById("choices");
 let scoreEl = document.getElementById("score");
-let playerEl = document.getElementById("name")
+let finalScoreEl = document.getElementById("finalScore");
+let playerEl = document.getElementById("initials")
 let saveButtonEl = document.getElementById("save")
 let timeLeft = 15;
 const questions = [
@@ -72,11 +73,12 @@ function countdown() {
         timeLeft--;
         timerEl.textContent = "Time Left: " + timeLeft;
 
-        if(timeLeft === 0) {
+        if(timeLeft <= 0) {
             clearInterval(timeInterval);
             quizEl.style.display = "none";
             endEl.style.display = "block";
             displaysLastSave();
+            finalScoreEl.textContent = score
         }
     }, 1000);
 }
@@ -85,7 +87,9 @@ function countdown() {
 function displayQuestion() {
     if (currentQuestion >= questions.length) {
         quizEl.style.display = "none";
+        endEl.style.display = "block";
         displaysLastSave();
+        finalScoreEl.textContent = score
     }
     else {
         for (let i = 0; i < 4; ++i) {
@@ -136,12 +140,12 @@ function displaysLastSave() {
     let lastSave = JSON.parse(localStorage.getItem("playerSave"));
 
     if (lastSave !== null) {
-        document.getElementById("saveInitials").textcontent = lastSave.player;
-        document.getElementById("saveScore").textcontent = lastSave.playerScore;
+        document.getElementById("saveInitials").textContent = "Initial: " + lastSave.player;
+        document.getElementById("saveScore").textContent = "Score: " + lastSave.playerScore;
     }
   }
 
-  saveButtonEl.addEventListener('click', function (event) {
+saveButtonEl.addEventListener('click', function (event) {
     event.preventDefault();
     saveScore();
     displaysLastSave();
