@@ -6,7 +6,9 @@ let timerEl = document.getElementById("timer");
 let questionEl = document.getElementById("question");
 let choicesEl = document.getElementById("choices");
 let scoreEl = document.getElementById("score");
-let timeLeft = 20;
+let playerEl = document.getElementById("name")
+let saveButtonEl = document.getElementById("save")
+let timeLeft = 15;
 const questions = [
     {
         question: "Inside which HTML element do we put the JavaScript?",
@@ -74,6 +76,7 @@ function countdown() {
             clearInterval(timeInterval);
             quizEl.style.display = "none";
             endEl.style.display = "block";
+            displaysLastSave();
         }
     }, 1000);
 }
@@ -82,6 +85,7 @@ function countdown() {
 function displayQuestion() {
     if (currentQuestion >= questions.length) {
         quizEl.style.display = "none";
+        displaysLastSave();
     }
     else {
         for (let i = 0; i < 4; ++i) {
@@ -116,3 +120,29 @@ startButtonEl.addEventListener("click", function() {
     countdown();
     displayQuestion();
 });
+
+// saves player score
+function saveScore() {
+    let playerSave = {
+      player: playerEl.value,
+      playerScore: score,
+    };
+
+    localStorage.setItem("playerSave", JSON.stringify(playerSave));
+}
+
+// displays saved information if there is any
+function displaysLastSave() {
+    let lastSave = JSON.parse(localStorage.getItem("playerSave"));
+
+    if (lastSave !== null) {
+        document.getElementById("saveInitials").textcontent = lastSave.player;
+        document.getElementById("saveScore").textcontent = lastSave.playerScore;
+    }
+  }
+
+  saveButtonEl.addEventListener('click', function (event) {
+    event.preventDefault();
+    saveScore();
+    displaysLastSave();
+  });
